@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: sketchy-aim-urinal-physics
+    runtime: static
+    buildCommand: echo "Static HTML game ready"
+    staticPublishPath: .
