@@ -112,7 +112,7 @@
         </div>
         <div>
           <h1 class="sketch-font text-2xl sm:text-3xl font-bold leading-none tracking-wide">Sketchy Aim: Urinal Physics</h1>
-          <p class="text-xs text-stone-600">Math Notebook Stickman • Freehand Face &amp; Weiner • Climax Arcade</p>
+          <p class="text-xs text-stone-600">Math Notebook Stickman • Freehand Face &amp; Weiner • 3-Player Online</p>
         </div>
       </div>
 
@@ -125,7 +125,7 @@
           Solo Levels
         </button>
         <button id="btn-mode-multi" onclick="switchMode('multi')" class="sketch-btn px-3 py-1.5 text-xs sm:text-sm font-bold bg-stone-100 text-stone-900">
-          Shared Bathroom
+          Shared Bathroom (3P)
         </button>
         <button id="btn-tab-dashboard" onclick="switchViewTab('dashboard')" class="sketch-btn tab-pill px-2.5 py-1.5 text-xs sm:text-sm font-bold bg-amber-100">
           Leaderboard
@@ -145,11 +145,11 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b-2 border-dashed border-stone-400">
           <div>
             <span class="inline-block px-2.5 py-0.5 text-xs font-extrabold border-2 border-stone-900 rounded-full bg-amber-100 mb-1.5">
-              Graph Paper Edition • Pencil Stickman
+              Graph Paper Edition • 3-Player Online Bathroom
             </span>
             <h2 class="sketch-font text-4xl sm:text-5xl font-bold leading-none">Sketchy Aim: Math Notebook</h2>
             <p class="text-xs sm:text-sm text-stone-600 mt-1.5">
-              Draw your own freehand face &amp; weiner, master unpredictable bladder surges, and climb the urinal leaderboard.
+              Draw your own freehand face &amp; weiner, master unpredictable bladder surges, and share a bathroom with up to 3 online players.
             </p>
           </div>
           <div class="flex items-center gap-2 self-start sm:self-center">
@@ -168,7 +168,7 @@
               <h3 class="sketch-font text-2xl font-bold mb-1">1. Choose Bathroom Mode &amp; Start</h3>
               <p class="text-xs text-stone-600 mb-3">
                 <strong>Solo Levels:</strong> Positions shift every level (Goal: 20% + 5%/lvl).<br />
-                <strong>Shared Bathroom:</strong> Smaller urinals, &gt;40% accuracy grants 1 Ass Coin every 10s!
+                <strong>Shared Bathroom (3P):</strong> Up to 3 players online in one room! &gt;40% accuracy grants 1 Ass Coin every 5s.
               </p>
 
               <div class="grid grid-cols-2 gap-2.5 mb-3">
@@ -177,8 +177,8 @@
                   <div class="text-[11px] text-stone-700 mt-0.5">Lvl <span id="menu-solo-lvl">1</span> • Shifting Urinals</div>
                 </button>
                 <button id="menu-mode-multi-btn" onclick="selectMenuMode('multi')" class="sketch-btn p-3 text-left bg-stone-50 border-stone-900">
-                  <div class="font-extrabold text-sm">🚽 Shared Bathroom</div>
-                  <div class="text-[11px] text-stone-700 mt-0.5">Small Urinals • Drinks &amp; Rage</div>
+                  <div class="font-extrabold text-sm">🚽 Shared Bathroom (3P)</div>
+                  <div class="text-[11px] text-stone-700 mt-0.5">3 Online Players • Drinks &amp; Rage</div>
                 </button>
               </div>
             </div>
@@ -260,7 +260,7 @@
           <div id="dash-pussy-coins" class="text-lg font-extrabold font-mono text-pink-700">0</div>
         </div>
         <div class="p-2.5 rounded-xl border-2 border-stone-900 bg-purple-100">
-          <div class="text-[11px] font-bold text-stone-500">🍑 Ass Coins (Online &gt;40%)</div>
+          <div class="text-[11px] font-bold text-stone-500">🍑 Ass Coins (&gt;40%)</div>
           <div id="dash-ass-coins" class="text-lg font-extrabold font-mono text-purple-800">0</div>
         </div>
       </div>
@@ -349,7 +349,7 @@
       </div>
     </section>
 
-    <!-- Main Play Workspace (Full-Width Clean Stage — Stream & Pressure Telemetry Window Hidden) -->
+    <!-- Main Play Workspace -->
     <main id="panel-play" class="hidden flex flex-col gap-3">
       <section class="w-full sketch-card overflow-hidden flex flex-col">
         <!-- HUD Strip Above Canvas -->
@@ -362,7 +362,7 @@
               <span id="hud-player-name" class="text-stone-950 underline decoration-wavy decoration-blue-500">Sketchy Guy</span>
             </span>
             <span id="hud-room-badge" class="hidden px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-200 border border-stone-900">
-              Shared Room
+              3P Room (1/3)
             </span>
             <span id="hud-mode-state-badge" class="px-2 py-0.5 rounded-full text-[11px] font-extrabold border border-stone-900 bg-amber-100">
               Pee Mode
@@ -468,10 +468,10 @@
             <!-- Push / Stroke Control -->
             <div class="flex flex-col gap-1">
               <div class="flex justify-between text-xs font-bold">
-                <span id="lbl-push-title">💨 Tap/Hold Pressure</span>
+                <span id="lbl-push-title">💨 Tap Pressure</span>
                 <span id="lbl-push" class="font-mono">45%</span>
               </div>
-              <input id="slider-push" type="range" min="10" max="100" value="45" oninput="setPlayerPush(Number(this.value))" class="w-full accent-amber-500 cursor-pointer" />
+              <input id="slider-push" type="range" min="0" max="100" value="45" oninput="setPlayerPush(Number(this.value))" class="w-full accent-amber-500 cursor-pointer" />
             </div>
 
             <!-- Action Buttons -->
@@ -500,22 +500,25 @@
             <div id="consumables-strip" class="flex flex-wrap items-center gap-1"></div>
           </div>
 
-          <!-- Compact Shared Bathroom Room Bar (visible only in Shared Bathroom mode) -->
+          <!-- Compact 3-Player Online Shared Bathroom Room Bar -->
           <div id="multiplayer-panel" class="hidden pt-2 border-t border-dashed border-stone-400 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div class="flex items-center gap-2">
-              <span class="font-extrabold">🚽 Shared Bathroom:</span>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold">🚽 Online Bathroom (<span id="mp-slot-count">1/3</span>):</span>
               <span id="mp-status-pill" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 border border-stone-900">
-                Local + Bots
+                Connecting...
               </span>
               <input
                 id="mp-room-input"
                 type="text"
-                value="public-restroom-1"
-                placeholder="Room code..."
+                value="bathroom-3p-1"
+                placeholder="3-player room code..."
                 class="w-36 px-2 py-1 text-xs font-mono bg-white border-2 border-stone-900 rounded-lg focus:outline-none"
               />
               <button onclick="connectSharedRoom()" class="sketch-btn px-2.5 py-1 text-xs font-bold bg-emerald-400 text-stone-950">
-                Join
+                Join (Max 3)
+              </button>
+              <button onclick="copyRoomInviteLink()" class="sketch-btn px-2.5 py-1 text-xs font-bold bg-amber-200 text-stone-950" title="Copy room link for friends">
+                🔗 Copy Invite
               </button>
             </div>
             <div id="mp-players-list" class="flex flex-wrap items-center gap-1.5 text-xs"></div>
@@ -527,63 +530,56 @@
 
   <!-- Custom Character Sketch Modal (Freehand Face + Weiner + Name) -->
   <div id="creator-modal" class="hidden fixed inset-0 bg-stone-900/60 backdrop-blur-[1px] z-50 flex items-center justify-center p-3 overflow-y-auto">
-    <div class="sketch-card max-w-2xl w-full p-4 sm:p-6 bg-[#fffef9] my-auto">
-      <div class="flex items-center justify-between pb-3 mb-4 border-b-2 border-stone-900">
+    <div class="sketch-card max-w-2xl w-full p-4 sm:p-5 bg-[#fffef9] my-auto">
+      <div class="flex items-center justify-between pb-2.5 mb-3 border-b-2 border-stone-900">
         <div>
-          <h2 class="sketch-font text-3xl font-bold leading-none">Freehand Stickman Sketch Studio</h2>
-          <p class="text-xs text-stone-600 mt-1">Draw your face &amp; weiner freehand in pencil (no geometric shapes!), name yourself, and play.</p>
+          <h2 class="sketch-font text-3xl font-bold leading-none">Customize Your Stickman</h2>
+          <p class="text-xs text-stone-600 mt-0.5">Freehand draw your face &amp; weiner (no geometric shapes) and set your name.</p>
         </div>
-        <button onclick="toggleCreatorModal(false)" class="sketch-btn px-2.5 py-1 text-xs font-extrabold bg-stone-100">✕</button>
+        <button onclick="toggleCreatorModal(false)" class="sketch-btn px-2.5 py-1 text-xs font-extrabold bg-rose-100">✕</button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <!-- Face Pad -->
-        <div class="flex flex-col gap-1.5">
-          <div class="flex items-center justify-between gap-1 flex-wrap">
-            <span class="text-xs font-extrabold">1. Freehand Face Sketch</span>
-            <div class="flex gap-1">
-              <button onclick="autoDrawRandomFace()" class="sketch-btn px-2 py-0.5 text-[11px] font-extrabold bg-blue-100">🎲 Auto Draw</button>
-              <button onclick="presetFace()" class="sketch-btn px-2 py-0.5 text-[11px] font-bold bg-amber-100">Hand Preset</button>
-              <button onclick="clearPad('face')" class="sketch-btn px-2 py-0.5 text-[11px] font-bold bg-rose-100">Clear</button>
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2 flex-1 min-w-[200px]">
+            <label class="text-xs font-extrabold whitespace-nowrap">Player Name:</label>
+            <input id="input-player-name" type="text" maxlength="20" value="Sketchy Guy" class="flex-1 px-2.5 py-1.5 text-sm font-bold bg-white border-2 border-stone-900 rounded-lg focus:outline-none" />
+          </div>
+          <div class="flex items-center gap-2 text-xs font-bold">
+            <span>Pencil Size:</span>
+            <input id="pencil-size" type="range" min="2" max="10" value="5" class="w-24 accent-stone-900 cursor-pointer" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Face Pad -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between text-xs font-extrabold">
+              <span>1. Freehand Face</span>
+              <div class="flex gap-1">
+                <button onclick="autoDrawRandomFace()" class="sketch-btn px-2 py-0.5 text-[11px] bg-amber-200">🎲 Auto Draw</button>
+                <button onclick="presetFace()" class="sketch-btn px-2 py-0.5 text-[11px] bg-stone-100">Preset</button>
+                <button onclick="clearPad('face')" class="sketch-btn px-2 py-0.5 text-[11px] bg-rose-100">Clear</button>
+              </div>
             </div>
+            <canvas id="pad-face" width="260" height="200" class="sketch-pad w-full h-[180px]"></canvas>
           </div>
-          <canvas id="pad-face" width="260" height="200" class="sketch-pad w-full h-[180px]"></canvas>
-        </div>
 
-        <!-- Weiner Pad -->
-        <div class="flex flex-col gap-1.5">
-          <div class="flex items-center justify-between gap-1 flex-wrap">
-            <span class="text-xs font-extrabold">2. Freehand Weiner Sketch</span>
-            <div class="flex gap-1">
-              <button onclick="autoDrawRandomWeiner()" class="sketch-btn px-2 py-0.5 text-[11px] font-extrabold bg-blue-100">🎲 Auto Draw</button>
-              <button onclick="presetWeiner()" class="sketch-btn px-2 py-0.5 text-[11px] font-bold bg-amber-100">Hand Preset</button>
-              <button onclick="clearPad('weiner')" class="sketch-btn px-2 py-0.5 text-[11px] font-bold bg-rose-100">Clear</button>
+          <!-- Weiner Pad -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between text-xs font-extrabold">
+              <span>2. Freehand Weiner</span>
+              <div class="flex gap-1">
+                <button onclick="autoDrawRandomWeiner()" class="sketch-btn px-2 py-0.5 text-[11px] bg-amber-200">🎲 Auto Draw</button>
+                <button onclick="presetWeiner()" class="sketch-btn px-2 py-0.5 text-[11px] bg-stone-100">Preset</button>
+                <button onclick="clearPad('weiner')" class="sketch-btn px-2 py-0.5 text-[11px] bg-rose-100">Clear</button>
+              </div>
             </div>
-          </div>
-          <canvas id="pad-weiner" width="260" height="200" class="sketch-pad w-full h-[180px]"></canvas>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-end justify-between gap-3 pt-3 border-t-2 border-stone-900">
-        <div class="flex-1 flex flex-col sm:flex-row gap-3">
-          <div class="flex-1">
-            <label for="input-player-name" class="block text-xs font-extrabold mb-1">3. Player Name</label>
-            <input
-              id="input-player-name"
-              type="text"
-              maxlength="22"
-              value="Sketchy Guy"
-              placeholder="Enter your name..."
-              class="w-full px-3 py-2 text-sm font-bold bg-white border-2 border-stone-900 rounded-xl focus:outline-none"
-            />
-          </div>
-          <div class="sm:w-32">
-            <label for="pencil-size" class="block text-xs font-extrabold mb-1">Pencil Tip</label>
-            <input id="pencil-size" type="range" min="2" max="10" value="4" class="w-full accent-stone-900 mt-2 cursor-pointer" />
+            <canvas id="pad-weiner" width="260" height="200" class="sketch-pad w-full h-[180px]"></canvas>
           </div>
         </div>
 
-        <div class="flex gap-2 justify-end">
+        <div class="flex justify-end gap-2 pt-2 border-t border-stone-300">
           <button onclick="toggleCreatorModal(false)" class="sketch-btn px-4 py-2 text-xs sm:text-sm font-bold bg-stone-100">
             Cancel
           </button>
@@ -595,18 +591,173 @@
     </div>
   </div>
 
-  <!-- Optional Firebase Bridge with Graceful Local + AI Bots Fallback -->
+  <!-- Live 3-Player WebSocket + BroadcastChannel Bridge -->
   <script>
-    window.__firebaseBridge = {
-      async connect(roomId, initialPayload, onPeersUpdate, onStatusChange) {
-        onStatusChange('Local + Bots');
-        onPeersUpdate([]);
-        return {
-          pushUpdate: async () => {},
-          disconnect: () => {}
-        };
+    window.__firebaseBridge = (function () {
+      const MAX_PLAYERS = 3;
+      let activeChannel = null;
+      let heartbeatTimer = null;
+
+      function getDefaultWsUrl() {
+        if (window.__ONLINE_3P_ENDPOINT__) return window.__ONLINE_3P_ENDPOINT__;
+        if (!window.location || !window.location.host) return '';
+        const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        return `${proto}//${window.location.host}`;
       }
-    };
+
+      function getStorageKey(roomId) {
+        return `sketchy_3p_room_${encodeURIComponent(roomId)}`;
+      }
+
+      function readRoomMap(roomId) {
+        try {
+          const raw = localStorage.getItem(getStorageKey(roomId));
+          return raw ? JSON.parse(raw) : {};
+        } catch (_) {
+          return {};
+        }
+      }
+
+      function writeRoomMap(roomId, map) {
+        try {
+          localStorage.setItem(getStorageKey(roomId), JSON.stringify(map));
+        } catch (_) {}
+      }
+
+      return {
+        maxPlayers: MAX_PLAYERS,
+        async connect(roomId, initialPayload, onPeersUpdate, onStatusChange) {
+          const clientId = `p_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`;
+          let currentData = { ...initialPayload, id: clientId, updatedAt: Date.now() };
+          let connected = true;
+          let wsConnected = false;
+
+          const wsUrl = getDefaultWsUrl();
+          let socket = null;
+
+          if (wsUrl) {
+            try {
+              socket = new WebSocket(wsUrl);
+              socket.onopen = () => {
+                if (!connected) return;
+                wsConnected = true;
+                socket.send(JSON.stringify({ type: 'join_3p', roomId, maxPlayers: MAX_PLAYERS, player: currentData }));
+              };
+              socket.onmessage = (evt) => {
+                if (!connected) return;
+                try {
+                  const msg = JSON.parse(evt.data);
+                  if (msg.type === 'room_full_3p') {
+                    connected = false;
+                    onStatusChange(`Room Full (${MAX_PLAYERS}/${MAX_PLAYERS})`);
+                    onPeersUpdate([], { roomFull: true });
+                  } else if (msg.type === 'room_state_3p' && Array.isArray(msg.players)) {
+                    const allPlayers = msg.players.slice(0, MAX_PLAYERS);
+                    const peers = allPlayers.filter((p) => p.id !== clientId);
+                    onStatusChange(`Live Online ${allPlayers.length}/${MAX_PLAYERS}`);
+                    onPeersUpdate(peers, { roomFull: false, totalCount: allPlayers.length });
+                  }
+                } catch (_) {}
+              };
+              socket.onclose = () => {
+                wsConnected = false;
+              };
+              socket.onerror = () => {
+                wsConnected = false;
+              };
+            } catch (_) {
+              socket = null;
+            }
+          }
+
+          // Local same-browser fallback if opened directly as file:// without server.js
+          function publishLocalFallback() {
+            if (!connected || wsConnected) return;
+            const now = Date.now();
+            const map = readRoomMap(roomId);
+            Object.keys(map).forEach((k) => {
+              if (!map[k] || now - (map[k].updatedAt || 0) > 5000) {
+                delete map[k];
+              }
+            });
+            if (!map[clientId] && Object.keys(map).length >= MAX_PLAYERS) {
+              connected = false;
+              onStatusChange(`Room Full (${MAX_PLAYERS}/${MAX_PLAYERS})`);
+              onPeersUpdate(Object.values(map).slice(0, MAX_PLAYERS - 1), { roomFull: true });
+              return;
+            }
+            map[clientId] = { ...currentData, updatedAt: now };
+            writeRoomMap(roomId, map);
+
+            const allPlayers = Object.values(map).slice(0, MAX_PLAYERS);
+            const peers = allPlayers.filter((p) => p.id !== clientId);
+            onStatusChange(`Online ${allPlayers.length}/${MAX_PLAYERS}`);
+            onPeersUpdate(peers, { roomFull: false, totalCount: allPlayers.length });
+
+            if (activeChannel) {
+              try {
+                activeChannel.postMessage({ type: 'sync_3p', roomId, map });
+              } catch (_) {}
+            }
+          }
+
+          if ('BroadcastChannel' in window) {
+            activeChannel = new BroadcastChannel(`sketchy_bathroom_3p_${roomId}`);
+            activeChannel.onmessage = (event) => {
+              if (!connected || wsConnected || !event.data || event.data.type !== 'sync_3p') return;
+              const now = Date.now();
+              const merged = { ...readRoomMap(roomId), ...(event.data.map || {}) };
+              Object.keys(merged).forEach((k) => {
+                if (!merged[k] || now - (merged[k].updatedAt || 0) > 5000) delete merged[k];
+              });
+              writeRoomMap(roomId, merged);
+              const allPlayers = Object.values(merged).slice(0, MAX_PLAYERS);
+              const peers = allPlayers.filter((p) => p.id !== clientId);
+              onStatusChange(`Online ${allPlayers.length}/${MAX_PLAYERS}`);
+              onPeersUpdate(peers, { roomFull: false, totalCount: allPlayers.length });
+            };
+          }
+
+          publishLocalFallback();
+
+          heartbeatTimer = setInterval(() => {
+            if (!connected) return;
+            if (wsConnected && socket && socket.readyState === WebSocket.OPEN) {
+              socket.send(JSON.stringify({ type: 'update_3p', roomId, player: currentData }));
+            } else {
+              publishLocalFallback();
+            }
+          }, 1200);
+
+          return {
+            async pushUpdate(nextPayload) {
+              if (!connected) return;
+              currentData = { ...currentData, ...nextPayload, id: clientId, updatedAt: Date.now() };
+              if (wsConnected && socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ type: 'update_3p', roomId, player: currentData }));
+              } else {
+                publishLocalFallback();
+              }
+            },
+            disconnect() {
+              connected = false;
+              if (heartbeatTimer) clearInterval(heartbeatTimer);
+              if (activeChannel) {
+                try { activeChannel.close(); } catch (_) {}
+                activeChannel = null;
+              }
+              if (socket) {
+                try { socket.close(); } catch (_) {}
+                socket = null;
+              }
+              const map = readRoomMap(roomId);
+              delete map[clientId];
+              writeRoomMap(roomId, map);
+            }
+          };
+        }
+      };
+    })();
   </script>
 
   <script>
@@ -644,13 +795,13 @@
       faceDataUrl: '',
       weinerDataUrl: '',
       aimAngleDeg: 25,
-      playerPush: 45, // 10..100 user-controlled push
-      randomSurge: 0, // unpredictable bladder pressure offset
+      playerPush: 45,
+      randomSurge: 0,
       targetSurge: 0,
       surgeTimer: 0,
       isPeeing: false,
       peeHoldTimer: 0,
-      maxBladder: 300, // Much larger bladder capacity per round
+      maxBladder: 300,
       bladder: 300,
       landedUnits: 0,
       missedUnits: 0,
@@ -661,6 +812,7 @@
       runHistory: [],
       roundEnded: false,
       overlayRetryLevel: null,
+
       // Shop & DIY Wardrobe
       ownedPencils: ['graphite'],
       activePencilId: 'graphite',
@@ -669,6 +821,7 @@
       selectedOutfitDraftId: null,
       outfitDrawings: {},
       hideBodyUnderClothes: false,
+
       // One-hand item & physiological states
       selectedHandIdx: 0,
       handAnimTimer: 0,
@@ -689,7 +842,6 @@
       strokePulse: 0,
       postClimaxCigarActive: false,
 
-      // Current level layout (changes every level!)
       layout: {
         playerXRatio: 0.2,
         urinalXRatio: 0.74,
@@ -722,9 +874,21 @@
     const weinerImg = new Image();
     const equippedOutfitImg = new Image();
 
+    // Cache remote players' custom face & weiner images so online friends see each other's drawings
+    const peerImageCache = new Map();
+    function getCachedPeerImage(url) {
+      if (!url) return null;
+      if (!peerImageCache.has(url)) {
+        const img = new Image();
+        img.src = url;
+        peerImageCache.set(url, img);
+      }
+      return peerImageCache.get(url);
+    }
+
     // bsnu: Blank image placeholder for Jerk-Off mode urinal photo.
-    // Replace `BSNU_PINUP_IMAGE_URL` below (e.g., 'https://example.com/photo.png' or data URL) to load your own image.
-    const BSNU_PINUP_IMAGE_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxDTLzKL4gmLULtx6hVEGp1XkkWYt2xlHcHkdiz3qJYA&s=10';
+    // Replace `BSNU_PINUP_IMAGE_URL` below (e.g., './bsnu.png' or 'https://example.com/photo.png') to load your own image.
+    const BSNU_PINUP_IMAGE_URL = '';
     const bsnuPinupImg = new Image();
     if (BSNU_PINUP_IMAGE_URL) {
       bsnuPinupImg.src = BSNU_PINUP_IMAGE_URL;
@@ -797,7 +961,7 @@
     function selectMenuMode(newMode) {
       switchMode(newMode, false);
       syncMenuUI();
-      showToast(newMode === 'multi' ? 'Selected Shared Bathroom Mode!' : 'Selected Solo Levels Mode!');
+      showToast(newMode === 'multi' ? 'Selected 3-Player Shared Bathroom!' : 'Selected Solo Levels Mode!');
     }
 
     function playFromMenu() {
@@ -978,8 +1142,6 @@
       outfitCtx.clearRect(0, 0, outfitPad.width, outfitPad.height);
       const item = CLOTHING_ITEMS.find((x) => x.id === state.selectedOutfitDraftId);
       const slot = item ? item.slot : 'top';
-
-      // Draw stickman reference guide on the studio pad so players can draw right on it
       drawStickmanGuideOnOutfitPad(slot);
 
       const savedData = state.outfitDrawings[state.selectedOutfitDraftId];
@@ -999,38 +1161,32 @@
 
       const cx = outfitPad.width * 0.5;
       if (slot === 'top') {
-        // Upper body stickman guide (head, torso, arms)
         outfitCtx.beginPath();
         outfitCtx.moveTo(cx - 14, 34);
         outfitCtx.bezierCurveTo(cx - 20, 46, cx - 16, 62, cx, 64);
         outfitCtx.bezierCurveTo(cx + 16, 62, cx + 20, 46, cx + 14, 34);
         outfitCtx.bezierCurveTo(cx + 8, 22, cx - 8, 22, cx - 14, 34);
 
-        // Torso
         outfitCtx.moveTo(cx, 64);
         outfitCtx.lineTo(cx, 122);
 
-        // Left & right arms
         outfitCtx.moveTo(cx, 76);
         outfitCtx.lineTo(cx - 46, 106);
         outfitCtx.moveTo(cx, 76);
         outfitCtx.lineTo(cx + 46, 106);
         outfitCtx.stroke();
       } else {
-        // Lower body stickman guide (waist/hips, legs, feet)
         outfitCtx.beginPath();
         outfitCtx.moveTo(cx - 34, 62);
         outfitCtx.lineTo(cx + 34, 62);
         outfitCtx.moveTo(cx, 44);
         outfitCtx.lineTo(cx, 62);
 
-        // Left leg & foot
         outfitCtx.moveTo(cx - 4, 62);
         outfitCtx.lineTo(cx - 24, 122);
         outfitCtx.lineTo(cx - 26, 168);
         outfitCtx.lineTo(cx - 42, 168);
 
-        // Right leg & foot
         outfitCtx.moveTo(cx + 4, 62);
         outfitCtx.lineTo(cx + 24, 122);
         outfitCtx.lineTo(cx + 26, 168);
@@ -1094,7 +1250,7 @@
     function useSelectedHandItem() {
       const item = HAND_ITEMS[state.selectedHandIdx] || HAND_ITEMS[0];
       if (state.assCoins < item.cost) {
-        showToast(`Need ${item.cost} Ass Coin (Shared Bathroom >40% acc every 10s)!`);
+        showToast(`Need ${item.cost} Ass Coin (>40% accuracy every 5s)!`);
         return;
       }
       state.assCoins -= item.cost;
@@ -1210,7 +1366,6 @@
       faceCtx.lineCap = 'round';
       faceCtx.lineJoin = 'round';
 
-      // Organic hand-sketched asymmetrical head contour (no geometric circle/ellipse)
       faceCtx.beginPath();
       faceCtx.moveTo(86, 62);
       faceCtx.bezierCurveTo(72, 92, 76, 138, 102, 162);
@@ -1219,7 +1374,6 @@
       faceCtx.bezierCurveTo(156, 36, 104, 38, 86, 62);
       faceCtx.stroke();
 
-      // Messy freehand pencil hair scribbles on top
       faceCtx.beginPath();
       faceCtx.moveTo(82, 64);
       faceCtx.quadraticCurveTo(90, 28, 106, 48);
@@ -1228,7 +1382,6 @@
       faceCtx.quadraticCurveTo(168, 26, 178, 56);
       faceCtx.stroke();
 
-      // Hand-drawn squinting brow & eye scribbles (no arcs/dots)
       faceCtx.beginPath();
       faceCtx.moveTo(98, 84);
       faceCtx.quadraticCurveTo(110, 78, 120, 86);
@@ -1243,14 +1396,12 @@
       faceCtx.quadraticCurveTo(151, 99, 144, 95);
       faceCtx.stroke();
 
-      // Crooked hand-drawn nose stroke
       faceCtx.beginPath();
       faceCtx.moveTo(131, 88);
       faceCtx.quadraticCurveTo(126, 106, 121, 116);
       faceCtx.quadraticCurveTo(129, 121, 138, 117);
       faceCtx.stroke();
 
-      // Hand-sketched smirk + chin crease
       faceCtx.beginPath();
       faceCtx.moveTo(108, 134);
       faceCtx.quadraticCurveTo(132, 146, 154, 131);
@@ -1268,7 +1419,6 @@
       weinerCtx.lineCap = 'round';
       weinerCtx.lineJoin = 'round';
 
-      // Organic freehand shaft & curved tip (zero geometric circles/rects)
       weinerCtx.beginPath();
       weinerCtx.moveTo(56, 92);
       weinerCtx.bezierCurveTo(96, 86, 144, 82, 182, 86);
@@ -1276,7 +1426,6 @@
       weinerCtx.bezierCurveTo(142, 125, 96, 122, 56, 117);
       weinerCtx.stroke();
 
-      // Hand-drawn tip ridge & slit
       weinerCtx.beginPath();
       weinerCtx.moveTo(174, 86);
       weinerCtx.quadraticCurveTo(168, 103, 175, 120);
@@ -1284,14 +1433,12 @@
       weinerCtx.quadraticCurveTo(199, 103, 194, 107);
       weinerCtx.stroke();
 
-      // Loose organic hand-drawn base curves
       weinerCtx.beginPath();
       weinerCtx.moveTo(58, 91);
       weinerCtx.bezierCurveTo(34, 75, 24, 100, 45, 106);
       weinerCtx.bezierCurveTo(26, 114, 36, 138, 59, 119);
       weinerCtx.stroke();
 
-      // Sketchy pencil vein/shading lines
       weinerCtx.lineWidth = 2.6;
       weinerCtx.beginPath();
       weinerCtx.moveTo(82, 99);
@@ -1310,7 +1457,6 @@
       const hJitter = (Math.random() - 0.5) * 18;
       const stylePick = Math.floor(Math.random() * 4);
 
-      // Random organic freehand head outline
       faceCtx.beginPath();
       faceCtx.moveTo(84 + wJitter * 0.4, 58 + hJitter * 0.3);
       faceCtx.bezierCurveTo(68, 92, 72 + wJitter * 0.5, 142, 104, 166 + hJitter * 0.4);
@@ -1319,7 +1465,6 @@
       faceCtx.bezierCurveTo(152, 34, 102, 36, 84 + wJitter * 0.4, 58 + hJitter * 0.3);
       faceCtx.stroke();
 
-      // Random messy pencil hair
       faceCtx.beginPath();
       const spikes = 4 + Math.floor(Math.random() * 3);
       for (let i = 0; i <= spikes; i++) {
@@ -1331,16 +1476,13 @@
       }
       faceCtx.stroke();
 
-      // Random eyes & eyebrows
       const eyeY = 92 + (Math.random() - 0.5) * 10;
       const browTilt = (Math.random() - 0.5) * 12;
       faceCtx.beginPath();
-      // Brows
       faceCtx.moveTo(96, eyeY - 10 - browTilt * 0.4);
       faceCtx.quadraticCurveTo(108, eyeY - 16 + browTilt * 0.4, 120, eyeY - 9);
       faceCtx.moveTo(140, eyeY - 9);
       faceCtx.quadraticCurveTo(152, eyeY - 16 - browTilt * 0.4, 164, eyeY - 10 + browTilt * 0.4);
-      // Eyes
       faceCtx.moveTo(100, eyeY);
       faceCtx.quadraticCurveTo(109, eyeY - 6, 117, eyeY);
       faceCtx.quadraticCurveTo(109, eyeY + 6, 100, eyeY);
@@ -1350,32 +1492,26 @@
       faceCtx.quadraticCurveTo(152, eyeY + 6, 143, eyeY);
       faceCtx.stroke();
 
-      // Random nose
       const noseLean = (Math.random() - 0.5) * 12;
       faceCtx.beginPath();
       faceCtx.moveTo(130, eyeY - 2);
       faceCtx.bezierCurveTo(124 + noseLean, eyeY + 12, 118 + noseLean, eyeY + 22, 136 + noseLean * 0.6, eyeY + 24);
       faceCtx.stroke();
 
-      // Random mouth expression
       const mouthY = 136 + (Math.random() - 0.5) * 8;
       faceCtx.beginPath();
       if (stylePick === 0) {
-        // Wide grin
         faceCtx.moveTo(104, mouthY - 3);
         faceCtx.quadraticCurveTo(130, mouthY + 16, 156, mouthY - 3);
       } else if (stylePick === 1) {
-        // Wavy scribble mouth
         faceCtx.moveTo(106, mouthY + 2);
         faceCtx.quadraticCurveTo(118, mouthY - 6, 130, mouthY + 3);
         faceCtx.quadraticCurveTo(142, mouthY + 10, 154, mouthY);
       } else if (stylePick === 2) {
-        // Surprised open sketch mouth
         faceCtx.moveTo(120, mouthY);
         faceCtx.bezierCurveTo(118, mouthY + 14, 142, mouthY + 14, 140, mouthY);
         faceCtx.bezierCurveTo(142, mouthY - 8, 118, mouthY - 8, 120, mouthY);
       } else {
-        // Lopsided smirk
         faceCtx.moveTo(110, mouthY + 4);
         faceCtx.quadraticCurveTo(132, mouthY + 6, 154, mouthY - 7);
       }
@@ -1398,7 +1534,6 @@
       const midY = 104 + curveLift * 0.45;
       const tipY = 104 + curveLift;
 
-      // Freehand shaft with random curve & size
       weinerCtx.beginPath();
       weinerCtx.moveTo(56, 104 - halfThick);
       weinerCtx.bezierCurveTo(
@@ -1427,7 +1562,6 @@
       );
       weinerCtx.stroke();
 
-      // Head ridge & tip detail
       weinerCtx.beginPath();
       weinerCtx.moveTo(endX - 18, tipY - halfThick * 1.02);
       weinerCtx.quadraticCurveTo(endX - 24, tipY, endX - 18, tipY + halfThick * 1.02);
@@ -1435,7 +1569,6 @@
       weinerCtx.quadraticCurveTo(endX + 7, tipY, endX + 3, tipY + 3);
       weinerCtx.stroke();
 
-      // Random freehand base loops
       const ballSpread = 12 + Math.random() * 10;
       weinerCtx.beginPath();
       weinerCtx.moveTo(58, 104 - halfThick * 0.85);
@@ -1443,51 +1576,12 @@
       weinerCtx.bezierCurveTo(24, 104 + ballSpread * 0.2, 32, 124 + ballSpread * 0.4, 58, 104 + halfThick * 0.85);
       weinerCtx.stroke();
 
-      // Sketchy pencil lines along shaft
       weinerCtx.lineWidth = 2.6;
       weinerCtx.beginPath();
       weinerCtx.moveTo(76, midY - halfThick * 0.25);
       weinerCtx.quadraticCurveTo((76 + endX) * 0.5, tipY - halfThick * 0.25, endX - 24, tipY - halfThick * 0.2);
       weinerCtx.stroke();
       showToast('🎲 Auto-drew a random freehand weiner!');
-    }
-
-    function presetWeiner() {
-      weinerCtx.clearRect(0, 0, weinerPad.width, weinerPad.height);
-      weinerCtx.strokeStyle = '#22201e';
-      weinerCtx.lineWidth = 3.2;
-      weinerCtx.lineCap = 'round';
-      weinerCtx.lineJoin = 'round';
-
-      // Organic freehand shaft & curved tip (zero geometric circles/rects)
-      weinerCtx.beginPath();
-      weinerCtx.moveTo(64, 96);
-      weinerCtx.bezierCurveTo(96, 92, 138, 88, 172, 91);
-      weinerCtx.bezierCurveTo(192, 93, 195, 113, 173, 116);
-      weinerCtx.bezierCurveTo(136, 120, 96, 118, 64, 114);
-      weinerCtx.stroke();
-
-      // Hand-drawn tip ridge & slit
-      weinerCtx.beginPath();
-      weinerCtx.moveTo(166, 91);
-      weinerCtx.quadraticCurveTo(161, 104, 167, 116);
-      weinerCtx.moveTo(184, 101);
-      weinerCtx.quadraticCurveTo(188, 104, 184, 107);
-      weinerCtx.stroke();
-
-      // Loose organic hand-drawn base curves
-      weinerCtx.beginPath();
-      weinerCtx.moveTo(66, 95);
-      weinerCtx.bezierCurveTo(44, 82, 36, 102, 54, 107);
-      weinerCtx.bezierCurveTo(37, 113, 45, 132, 67, 116);
-      weinerCtx.stroke();
-
-      // Sketchy pencil vein/shading lines
-      weinerCtx.lineWidth = 1.8;
-      weinerCtx.beginPath();
-      weinerCtx.moveTo(86, 101);
-      weinerCtx.quadraticCurveTo(116, 97, 144, 100);
-      weinerCtx.stroke();
     }
 
     function applyDrawingImages() {
@@ -1699,10 +1793,9 @@
       document.getElementById('lbl-push').textContent = `${Math.round(state.playerPush)}%`;
     }
 
-    // Rapid tapping/clicking Space or button starts flow & boosts pressure (~3 clicks/sec ≈ 50%) with no hold mechanic
     function triggerTapPump(isDown, isRepeat = false) {
       if (state.roundEnded || !isDown) return;
-      if (isRepeat) return; // Ignore OS key-hold repeat so only actual clicks/taps pump pressure
+      if (isRepeat) return;
 
       const btn = document.getElementById('btn-pee-hold');
       if (btn) {
@@ -1719,7 +1812,6 @@
         state.peeHoldTimer = 0.55;
       }
 
-      // ~3 clicks in 1s reaches ~50% pressure; rapid clicking can scale all the way to 100%
       const tapBoost = 22;
       setPlayerPush(state.playerPush + tapBoost);
 
@@ -1755,7 +1847,6 @@
       const targetX = w * state.layout.urinalXRatio;
       const targetY = state.mode === 'multi' ? (floorY - 96) : (h * state.layout.urinalYRatio - 18);
 
-      // Launch cum droplets from penis tip toward urinal & pin-up
       const charX = w * state.layout.playerXRatio;
       const rad = (state.aimAngleDeg * Math.PI) / 180;
       const startX = charX + Math.cos(rad) * 42;
@@ -1777,7 +1868,6 @@
         });
       }
 
-      // bsnu: Splatter climax drops onto the urinal picture
       for (let s = 0; s < 6; s++) {
         state.pinupCumSplatters.push({
           rx: (Math.random() - 0.5) * 0.75,
@@ -1798,7 +1888,7 @@
       updateHud();
     }
 
-    // Keyboard controls (tap-only Space, no hold mechanic)
+    // Keyboard controls
     window.addEventListener('keydown', (e) => {
       if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
       if (e.code === 'Space') {
@@ -1831,7 +1921,6 @@
       }
     });
 
-    // Pointer drag on canvas adjusts aim angle smoothly
     let draggingCanvas = false;
     canvas.addEventListener('mousedown', (e) => {
       if (e.button !== 0) return;
@@ -1865,32 +1954,11 @@
       setAimAngle(mapped);
     }
 
-    // --- Mode & Shared Bathroom ---
+    // --- Mode & Shared Bathroom (Strictly 3-Player Online Room) ---
+    const MAX_ONLINE_PLAYERS = 3;
+
     function initBots() {
-      state.bots = [
-        {
-          id: 'bot_1',
-          name: 'Pencil Pete',
-          xRatio: 0.66,
-          urinalXRatio: 0.78,
-          aimDeg: 22,
-          push: 50,
-          bladder: 100,
-          peeing: false,
-          timer: 1.2
-        },
-        {
-          id: 'bot_2',
-          name: 'Doodle Dan',
-          xRatio: 0.12,
-          urinalXRatio: 0.24,
-          aimDeg: 28,
-          push: 42,
-          bladder: 100,
-          peeing: false,
-          timer: 2.1
-        }
-      ];
+      state.bots = [];
     }
 
     function switchMode(newMode, autoEnterPlay = true) {
@@ -1916,6 +1984,7 @@
           state.mpSession.disconnect();
           state.mpSession = null;
         }
+        state.remotePeers = [];
       }
 
       syncMenuUI();
@@ -1926,8 +1995,23 @@
       renderRoster();
     }
 
+    function copyRoomInviteLink() {
+      const roomId = document.getElementById('mp-room-input').value.trim() || 'bathroom-3p-1';
+      const url = new URL(window.location.href);
+      url.searchParams.set('room', roomId);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url.toString()).then(() => {
+          showToast(`Copied invite link for room "${roomId}"!`);
+        }).catch(() => {
+          showToast(`Share room code: ${roomId}`);
+        });
+      } else {
+        showToast(`Share room code: ${roomId}`);
+      }
+    }
+
     async function connectSharedRoom() {
-      const roomId = document.getElementById('mp-room-input').value.trim() || 'public-restroom-1';
+      const roomId = document.getElementById('mp-room-input').value.trim() || 'bathroom-3p-1';
       if (state.mpSession && state.mpSession.disconnect) {
         state.mpSession.disconnect();
       }
@@ -1945,12 +2029,21 @@
           faceDataUrl: state.faceDataUrl,
           weinerDataUrl: state.weinerDataUrl
         },
-        (peers) => {
-          state.remotePeers = peers;
+        (peers, meta = {}) => {
+          if (meta.roomFull) {
+            showToast(`Room "${roomId}" already has ${MAX_ONLINE_PLAYERS}/${MAX_ONLINE_PLAYERS} online players!`);
+            return;
+          }
+          state.remotePeers = Array.isArray(peers) ? peers.slice(0, MAX_ONLINE_PLAYERS - 1) : [];
           renderRoster();
         },
         (statusText) => {
           document.getElementById('mp-status-pill').textContent = statusText;
+          const totalInRoom = Math.min(MAX_ONLINE_PLAYERS, 1 + state.remotePeers.length);
+          const slotEl = document.getElementById('mp-slot-count');
+          if (slotEl) slotEl.textContent = `${totalInRoom}/${MAX_ONLINE_PLAYERS}`;
+          const roomBadge = document.getElementById('hud-room-badge');
+          if (roomBadge) roomBadge.textContent = `3P Room (${totalInRoom}/${MAX_ONLINE_PLAYERS})`;
         }
       );
       renderRoster();
@@ -1977,26 +2070,36 @@
       const list = document.getElementById('mp-players-list');
       if (!list) return;
 
+      const activePeers = state.remotePeers.slice(0, MAX_ONLINE_PLAYERS - 1);
+      const totalCount = 1 + activePeers.length;
+      const slotEl = document.getElementById('mp-slot-count');
+      if (slotEl) slotEl.textContent = `${totalCount}/${MAX_ONLINE_PLAYERS}`;
+      const roomBadge = document.getElementById('hud-room-badge');
+      if (roomBadge) roomBadge.textContent = `3P Room (${totalCount}/${MAX_ONLINE_PLAYERS})`;
+
       const entries = [
-        { name: `${state.playerName} (You)`, bladder: Math.round(state.bladder), status: state.jerkMode ? 'Jerk-Off' : (state.isPeeing ? 'Peeing' : 'Ready'), badge: 'bg-blue-200' },
-        ...state.bots.map((b) => ({
-          name: `${b.name} (Bot)`,
-          bladder: Math.round(b.bladder),
-          status: b.peeing ? 'Peeing' : 'Ready',
-          badge: 'bg-amber-100'
-        })),
-        ...state.remotePeers.map((p) => ({
-          name: p.name || 'Guest Sketch',
-          bladder: Math.round(p.bladder ?? 100),
+        { name: `${state.playerName} (P1 You)`, bladder: Math.round(state.bladder), status: state.jerkMode ? 'Jerk-Off' : (state.isPeeing ? 'Peeing' : 'Ready'), badge: 'bg-blue-200' },
+        ...activePeers.map((p, idx) => ({
+          name: `${p.name || 'Guest'} (P${idx + 2})`,
+          bladder: Math.round(p.bladder ?? state.maxBladder),
           status: p.isPeeing ? 'Peeing' : 'Online',
           badge: 'bg-emerald-100'
         }))
       ];
 
+      for (let i = entries.length; i < MAX_ONLINE_PLAYERS; i++) {
+        entries.push({
+          name: `Slot P${i + 1}: Waiting...`,
+          bladder: 0,
+          status: 'Open',
+          badge: 'bg-stone-100'
+        });
+      }
+
       list.innerHTML = entries.map((e) => `
-        <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg border border-stone-900 ${e.badge}">
-          <span class="font-bold truncate max-w-[130px]">${escapeHtml(e.name)}</span>
-          <span class="font-mono text-[11px]">${e.bladder}% • ${e.status}</span>
+        <div class="flex items-center justify-between px-2 py-1 rounded-lg border border-stone-900 ${e.badge}">
+          <span class="font-bold truncate max-w-[125px]">${escapeHtml(e.name)}</span>
+          <span class="font-mono text-[11px] ml-1.5">${e.status === 'Open' ? 'Open' : `${e.bladder}% • ${e.status}`}</span>
         </div>
       `).join('');
     }
@@ -2131,7 +2234,6 @@
       ctx.fillStyle = '#fffef9';
       ctx.fillRect(0, 0, w, h);
 
-      // Faint blue 20px squared math grid
       const grid = 20;
       ctx.strokeStyle = 'rgba(59, 130, 246, 0.16)';
       ctx.lineWidth = 1;
@@ -2146,7 +2248,6 @@
       }
       ctx.stroke();
 
-      // Double red notebook margin line on the left
       ctx.strokeStyle = 'rgba(239, 68, 68, 0.42)';
       ctx.lineWidth = 1.4;
       ctx.beginPath();
@@ -2156,7 +2257,6 @@
       ctx.lineTo(42, h);
       ctx.stroke();
 
-      // Subtle notebook binder holes
       ctx.fillStyle = 'rgba(120, 113, 108, 0.15)';
       ctx.strokeStyle = 'rgba(120, 113, 108, 0.35)';
       ctx.lineWidth = 1;
@@ -2175,7 +2275,6 @@
       ctx.strokeStyle = color;
       ctx.lineWidth = width;
       ctx.lineCap = 'round';
-      // Primary pencil stroke with slight hand-drawn curve
       const mx = (x1 + x2) * 0.5 + ((y2 - y1) * 0.025);
       const my = (y1 + y2) * 0.5 - ((x2 - x1) * 0.025);
       ctx.beginPath();
@@ -2183,7 +2282,6 @@
       ctx.quadraticCurveTo(mx, my, x2, y2);
       ctx.stroke();
 
-      // Faint secondary graphite over-stroke
       ctx.globalAlpha = 0.32;
       ctx.lineWidth = Math.max(1, width * 0.6);
       ctx.beginPath();
@@ -2198,7 +2296,6 @@
       ctx.translate(x, y);
       ctx.scale(scale, scale);
 
-      // Pencil hatching shadow behind urinal
       ctx.strokeStyle = 'rgba(34, 32, 30, 0.22)';
       ctx.lineWidth = 1.3;
       for (let hy = -44; hy <= 34; hy += 7) {
@@ -2208,7 +2305,6 @@
         ctx.stroke();
       }
 
-      // Hand-sketched porcelain bowl outline
       ctx.fillStyle = '#ffffff';
       ctx.strokeStyle = '#22201e';
       ctx.lineWidth = 2.6;
@@ -2221,7 +2317,6 @@
       ctx.fill();
       ctx.stroke();
 
-      // Hand-drawn inner basin & drain crosshatching
       ctx.beginPath();
       ctx.moveTo(-18, -32);
       ctx.quadraticCurveTo(0, -40, 18, -32);
@@ -2229,11 +2324,10 @@
       ctx.quadraticCurveTo(-22, -16, -18, -32);
       ctx.stroke();
 
-      // Flush pipe & handle
       drawSketchLine(0, -49, 0, -68, 2.8);
       drawSketchLine(-9, -68, 9, -68, 2.8);
 
-      // bsnu: Picture hung on urinal in Rage Mode or Jerk-Off mode (blank image ready for custom upload)
+      // bsnu: Picture hung on urinal in Rage Mode or Jerk-Off mode
       if (hasPinup) {
         const pw = 38;
         const ph = 46;
@@ -2253,7 +2347,7 @@
         ctx.fill();
         ctx.stroke();
 
-        // bsnu: If an external/custom image is assigned to bsnuPinupImg, draw it inside the frame; otherwise keep blank sketch slot
+        // bsnu: Custom image display if assigned
         if (BSNU_PINUP_IMAGE_URL && bsnuPinupImg.complete && bsnuPinupImg.naturalWidth > 0) {
           ctx.save();
           ctx.beginPath();
@@ -2262,7 +2356,6 @@
           ctx.drawImage(bsnuPinupImg, -pw / 2 + 3, -ph / 2 + 3, pw - 6, ph - 6);
           ctx.restore();
         } else {
-          // bsnu: Blank image placeholder lines & label
           ctx.strokeStyle = 'rgba(87, 83, 78, 0.45)';
           ctx.lineWidth = 1.2;
           ctx.beginPath();
@@ -2278,7 +2371,6 @@
           ctx.fillText('bsnu', 0, 3);
         }
 
-        // Climax splatters on the urinal picture
         ctx.fillStyle = '#ffffff';
         ctx.strokeStyle = '#64748b';
         ctx.lineWidth = 1;
@@ -2317,7 +2409,6 @@
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      // Organic hand-sketched stickman head (no circle/arc primitive)
       ctx.beginPath();
       ctx.moveTo(-16, headY - 14);
       ctx.bezierCurveTo(-22, headY - 3, -20, headY + 13, -8, headY + 20);
@@ -2326,7 +2417,6 @@
       ctx.bezierCurveTo(-2, headY - 24, -12, headY - 20, -16, headY - 14);
       ctx.stroke();
 
-      // Messy hair tufts
       ctx.beginPath();
       ctx.moveTo(-12, headY - 19);
       ctx.lineTo(-8, headY - 27);
@@ -2335,7 +2425,6 @@
       ctx.lineTo(10, headY - 20);
       ctx.stroke();
 
-      // Freehand eyes, crooked nose, and smirk
       ctx.beginPath();
       ctx.moveTo(-8, headY - 5);
       ctx.quadraticCurveTo(-4, headY - 8, -1, headY - 5);
@@ -2358,7 +2447,6 @@
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      // Organic hand-drawn penis contour (no circles or straight geometric bars)
       ctx.beginPath();
       ctx.moveTo(0, -4);
       ctx.bezierCurveTo(11, -5, 22, -6, 30, -4);
@@ -2366,7 +2454,6 @@
       ctx.bezierCurveTo(22, 6, 11, 5, 0, 4);
       ctx.stroke();
 
-      // Tip ridge & loose base curve
       ctx.beginPath();
       ctx.moveTo(27, -4);
       ctx.quadraticCurveTo(25, 0, 27, 4);
@@ -2413,7 +2500,6 @@
         outfitSource.naturalWidth > 0
       );
 
-      // Easy Stickman Legs & Feet (unless hidden under drawn clothes)
       if (!hideBodyUnderClothes) {
         drawSketchLine(-2, hipY, -15, -32, 3.4, '#141210');
         drawSketchLine(-15, -32, -17, 0, 3.4, '#141210');
@@ -2423,23 +2509,19 @@
         drawSketchLine(15, -32, 17, 0, 3.4, '#141210');
         drawSketchLine(17, 0, 29, -1, 3.8, '#141210');
 
-        // Easy Stickman Spine / Torso
         drawSketchLine(0, hipY, 0, shoulderY, 3.6, '#141210');
       }
 
-      // Weiner pivots from hip, rotates with aim angle, and strokes when tapping Space in Jerk-Off mode
       const rad = (aimDeg * Math.PI) / 180;
       const strokeTravel = strokeBoost > 0 ? Math.sin(strokeBoost * Math.PI) : 0;
       const strokeOffset = strokeTravel * 8;
       const pivotX = 5 + strokeOffset * 0.45;
       const pivotY = hipY + 2;
 
-      // Compute grip point along the bigger penis shaft so the hand holds it and moves back & forth with Space
       const gripShaftDist = 14 + strokeTravel * 14;
       const gripLocalX = pivotX + Math.cos(rad) * gripShaftDist;
       const gripLocalY = pivotY - Math.sin(rad) * gripShaftDist;
 
-      // Stickman Arms (unless hidden under drawn clothes)
       if (!hideBodyUnderClothes) {
         const holdCigarPose = Boolean(state.postClimaxCigarActive && !state.jerkMode);
         if (handAnim > 0 || holdCigarPose) {
@@ -2449,7 +2531,6 @@
           drawSketchLine(0, shoulderY + 6, mouthHandX, mouthHandY, 3.2, '#141210');
 
           if (holdCigarPose) {
-            // Second hand held up near mouth alongside big lit cigar
             drawSketchLine(mouthHandX - 5, mouthHandY + 2, mouthHandX + 4, mouthHandY - 5, 2.8, '#141210');
           } else if (handAction === 'smoke') {
             drawSketchLine(mouthHandX, mouthHandY, mouthHandX + 12, mouthHandY - 4, 2.6, '#57534e');
@@ -2465,7 +2546,6 @@
         drawSketchLine(0, shoulderY + 6, gripLocalX, gripLocalY, 3.2, '#141210');
       }
 
-      // Big lit cigar in mouth after climax until round ends or another jerk-off burst triggers
       if (state.postClimaxCigarActive && !state.jerkMode) {
         ctx.save();
         const cigarX = 11;
@@ -2473,7 +2553,6 @@
         ctx.translate(cigarX, cigarY);
         ctx.rotate(-0.18);
 
-        // Thick hand-drawn cigar body
         ctx.fillStyle = '#92400e';
         ctx.strokeStyle = '#141210';
         ctx.lineWidth = 2.4;
@@ -2482,11 +2561,9 @@
         ctx.fill();
         ctx.stroke();
 
-        // Cigar band
         ctx.fillStyle = '#fde68a';
         ctx.fillRect(16, -4.2, 4, 8.4);
 
-        // Glowing lit ember tip & smoke puffs
         ctx.fillStyle = '#ef4444';
         ctx.beginPath();
         ctx.arc(29, 0, 4.2, 0, Math.PI * 2);
@@ -2502,7 +2579,6 @@
         ctx.restore();
       }
 
-      // Custom drawn outfit overlay if equipped
       if (outfitSource && outfitSource.complete && outfitSource.naturalWidth > 0) {
         ctx.save();
         ctx.globalAlpha = 0.95;
@@ -2510,7 +2586,6 @@
         ctx.restore();
       }
 
-      // Transparent Freehand Face Drawing Directly on Graph Paper (Bigger & Bolder)
       const headSize = 70;
       if (faceSource && faceSource.complete && faceSource.naturalWidth > 0) {
         ctx.save();
@@ -2526,7 +2601,6 @@
         ctx.restore();
       }
 
-      // Bigger & bolder freehand penis drawing
       ctx.save();
       ctx.translate(pivotX, pivotY);
       ctx.rotate(-rad);
@@ -2543,7 +2617,6 @@
 
       ctx.restore();
 
-      // Draw hand grip around the penis shaft so it visibly holds and slides along it
       ctx.save();
       ctx.strokeStyle = '#141210';
       ctx.fillStyle = '#fffef9';
@@ -2578,7 +2651,6 @@
       const h = canvas.clientHeight || 420;
       const floorY = h - 42;
 
-      // Decay hold timer, hand motion, stroke pulse & natural push settle
       if (state.peeHoldTimer > 0) {
         state.peeHoldTimer = Math.max(0, state.peeHoldTimer - dt);
         if (state.peeHoldTimer === 0 && !state.jerkMode) {
@@ -2594,12 +2666,10 @@
       if (state.jerkMode && state.climaxMeter > 0) {
         state.climaxMeter = Math.max(0, state.climaxMeter - dt * 18);
       }
-      // Pressure decays over time so ~3 clicks/sec holds around ~50% and fast clicks reach 100%
       if (state.playerPush > 0) {
         setPlayerPush(state.playerPush - dt * 14);
       }
 
-      // Check >80% accuracy Jerk-Off transition once some stream has been attempted (up to 5 cum bursts)
       const totalAttempted = state.landedUnits + state.missedUnits;
       if (
         totalAttempted >= 10 &&
@@ -2613,7 +2683,6 @@
         showToast(`🔥 Accuracy >80%! Jerk-Off Mode (${state.cumCount}/${state.maxCumPerRound} cum) — tap Space fast!`);
       }
 
-      // Ass Coin reward: 1 Ass Coin every 5s when accuracy > 40%
       if (!state.roundEnded && getCurrentAccuracyPct() > 40) {
         state.assCoinTimer += dt;
         if (state.assCoinTimer >= 5) {
@@ -2626,7 +2695,6 @@
         state.assCoinTimer = 0;
       }
 
-      // Strong random pressure surges & shifts
       state.surgeTimer -= dt;
       if (state.surgeTimer <= 0) {
         state.surgeTimer = 0.35 + Math.random() * 0.65;
@@ -2639,7 +2707,6 @@
 
       drawMathNotebookPaper(w, h);
       drawSketchLine(0, floorY, w, floorY, 2.8, '#22201e');
-      // Subtle pencil crosshatching along notebook floor line
       ctx.save();
       ctx.strokeStyle = 'rgba(34, 32, 30, 0.25)';
       ctx.lineWidth = 1.2;
@@ -2661,38 +2728,20 @@
       const hitboxes = [];
 
       if (state.mode === 'multi') {
-        // Smaller urinals in Shared Bathroom
+        // 3 smaller stalls for up to 3 online players in Shared Bathroom
         const u1 = drawUrinal(w * 0.24, floorY - 82, 0.78, 'Stall 1', false);
-        const u2 = drawUrinal(w * 0.52, floorY - 82, 0.78, 'You', state.rageMode || state.jerkMode);
+        const u2 = drawUrinal(w * 0.52, floorY - 82, 0.78, 'Stall 2', state.rageMode || state.jerkMode);
         const u3 = drawUrinal(w * 0.80, floorY - 82, 0.78, 'Stall 3', false);
         hitboxes.push(u1, u2, u3);
 
-        const b2 = state.bots[1];
-        b2.timer -= dt;
-        if (b2.timer <= 0) {
-          b2.timer = 0.8 + Math.random() * 1.4;
-          b2.peeing = b2.bladder > 0 ? Math.random() > 0.35 : false;
-          b2.aimDeg = 18 + Math.random() * 16;
-        }
-        const b2Tip = drawPencilCharacter({
-          x: w * b2.xRatio,
-          floorY,
-          aimDeg: b2.aimDeg,
-          name: b2.name,
-          faceSource: null,
-          weinerSource: null,
-          scale: 0.92
-        });
-        if (b2.peeing && b2.bladder > 0) {
-          b2.bladder = Math.max(0, b2.bladder - dt * 11);
-          spawnDroplet(b2Tip.tipX, b2Tip.tipY, b2.aimDeg, 52, false, 'pee', { fill: '#eab308', stroke: '#a16207' });
-        }
+        const activePeers = state.remotePeers.slice(0, MAX_ONLINE_PLAYERS - 1);
 
+        // Player 1 (Local You)
         const myTip = drawPencilCharacter({
           x: w * state.layout.playerXRatio,
           floorY,
           aimDeg: state.aimAngleDeg,
-          name: state.playerName,
+          name: `${state.playerName} (P1)`,
           faceSource: faceImg,
           weinerSource: weinerImg,
           outfitSource: state.equippedOutfitId ? equippedOutfitImg : null,
@@ -2713,40 +2762,25 @@
           const drainRate = 15 + (effectivePressure * 0.13);
           state.bladder = Math.max(0, state.bladder - dt * drainRate);
           spawnDroplet(myTip.tipX, myTip.tipY, state.aimAngleDeg, effectivePressure, true, 'pee', liquidStyle);
-          syncMultiplayerNow();
         }
 
-        const b1 = state.bots[0];
-        b1.timer -= dt;
-        if (b1.timer <= 0) {
-          b1.timer = 0.7 + Math.random() * 1.5;
-          b1.peeing = b1.bladder > 0 ? Math.random() > 0.3 : false;
-          b1.aimDeg = 16 + Math.random() * 18;
-        }
-        const b1Tip = drawPencilCharacter({
-          x: w * b1.xRatio,
-          floorY,
-          aimDeg: b1.aimDeg,
-          name: b1.name,
-          faceSource: null,
-          weinerSource: null,
-          scale: 0.92
-        });
-        if (b1.peeing && b1.bladder > 0) {
-          b1.bladder = Math.max(0, b1.bladder - dt * 11);
-          spawnDroplet(b1Tip.tipX, b1Tip.tipY, b1.aimDeg, 54, false, 'pee', { fill: '#eab308', stroke: '#a16207' });
-        }
+        // Keep online room state updated continuously so peers see live aim/bladder even when idle
+        syncMultiplayerNow();
 
-        state.remotePeers.forEach((peer, idx) => {
-          const px = w * (0.14 + ((idx + 1) * 0.14) % 0.72);
+        // Up to 2 other online players (P2 & P3) with their custom faces & weiners
+        const peerSlots = [0.14, 0.70];
+        activePeers.forEach((peer, idx) => {
+          const px = w * (peerSlots[idx] ?? (0.14 + idx * 0.56));
+          const peerFace = getCachedPeerImage(peer.faceDataUrl);
+          const peerWeiner = getCachedPeerImage(peer.weinerDataUrl);
           const pTip = drawPencilCharacter({
             x: px,
             floorY,
             aimDeg: peer.aimAngleDeg || 25,
-            name: peer.name || 'Guest',
-            faceSource: null,
-            weinerSource: null,
-            scale: 0.86
+            name: `${peer.name || 'Player'} (P${idx + 2})`,
+            faceSource: peerFace,
+            weinerSource: peerWeiner,
+            scale: 0.92
           });
           if (peer.isPeeing) {
             spawnDroplet(pTip.tipX, pTip.tipY, peer.aimAngleDeg || 25, peer.playerPush || 45, false, 'pee', { fill: '#eab308', stroke: '#a16207' });
@@ -2851,7 +2885,6 @@
         ctx.restore();
       }
 
-      // End round when bladder is empty (and not in Jerk-Off mode waiting for climax)
       if (!state.roundEnded && !state.jerkMode && state.bladder <= 0 && state.droplets.length === 0) {
         finishRound();
       }
@@ -2892,6 +2925,15 @@
     generateLevelLayout(state.level);
     syncMenuUI();
     updateHud();
+
+    // Auto-join 3-player room if opened via ?room= invite link
+    const initialRoomParam = new URLSearchParams(window.location.search).get('room');
+    if (initialRoomParam) {
+      const roomInput = document.getElementById('mp-room-input');
+      if (roomInput) roomInput.value = initialRoomParam;
+      switchMode('multi', true);
+    }
+
     requestAnimationFrame(step);
   </script>
 </body>
