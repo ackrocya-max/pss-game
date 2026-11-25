@@ -1,0 +1,12 @@
+{
+"name": "sketchy-aim-urinal-physics",
+"version": "1.0.0",
+"description": "3-player online urinal physics sketch game",
+"main": "server.js",
+"scripts": {
+"start": "node server.js"
+},
+"dependencies": {
+"ws": "^8.18.0"
+}
+}
